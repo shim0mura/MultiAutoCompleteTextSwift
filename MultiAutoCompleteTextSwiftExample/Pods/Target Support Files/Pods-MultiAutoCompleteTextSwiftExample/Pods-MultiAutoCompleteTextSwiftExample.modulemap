@@ -1,0 +1,6 @@
+framework module Pods_MultiAutoCompleteTextSwiftExample {
+  umbrella header "Pods-MultiAutoCompleteTextSwiftExample-umbrella.h"
+
+  export *
+  module * { export * }
+}

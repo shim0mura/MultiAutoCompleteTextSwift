@@ -1,0 +1,16 @@
+PODS:
+  - MultiAutoCompleteTextSwift (0.0.1)
+
+DEPENDENCIES:
+  - MultiAutoCompleteTextSwift (from `..`)
+
+EXTERNAL SOURCES:
+  MultiAutoCompleteTextSwift:
+    :path: ".."
+
+SPEC CHECKSUMS:
+  MultiAutoCompleteTextSwift: 9b9c8d1bb434588361d4a22e777b1947b2eb8169
+
+PODFILE CHECKSUM: 7e5ac774fb9572dbd227b44031fc4a3a7ce1b26b
+
+COCOAPODS: 1.1.0.rc.2

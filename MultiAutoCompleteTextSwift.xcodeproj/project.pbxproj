@@ -8,12 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		E017E9F71D97706200A95B9B /* MultiAutoCompleteTextSwift.h in Headers */ = {isa = PBXBuildFile; fileRef = E017E9F51D97706200A95B9B /* MultiAutoCompleteTextSwift.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E017E9FE1D97722500A95B9B /* MultiAutoCompleteTextSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = E017E9FD1D97722500A95B9B /* MultiAutoCompleteTextSwift.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		E017E9F21D97706200A95B9B /* MultiAutoCompleteTextSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MultiAutoCompleteTextSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E017E9F51D97706200A95B9B /* MultiAutoCompleteTextSwift.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MultiAutoCompleteTextSwift.h; sourceTree = "<group>"; };
 		E017E9F61D97706200A95B9B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E017E9FD1D97722500A95B9B /* MultiAutoCompleteTextSwift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultiAutoCompleteTextSwift.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -48,6 +50,7 @@
 			children = (
 				E017E9F51D97706200A95B9B /* MultiAutoCompleteTextSwift.h */,
 				E017E9F61D97706200A95B9B /* Info.plist */,
+				E017E9FD1D97722500A95B9B /* MultiAutoCompleteTextSwift.swift */,
 			);
 			path = MultiAutoCompleteTextSwift;
 			sourceTree = "<group>";
@@ -95,6 +98,7 @@
 				TargetAttributes = {
 					E017E9F11D97706200A95B9B = {
 						CreatedOnToolsVersion = 8.0;
+						LastSwiftMigration = 0800;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -131,6 +135,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E017E9FE1D97722500A95B9B /* MultiAutoCompleteTextSwift.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -239,6 +244,7 @@
 		E017E9FB1D97706200A95B9B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -250,13 +256,15 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "work.t-s.MultiAutoCompleteTextSwift";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 3.0;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 2.3;
 			};
 			name = Debug;
 		};
 		E017E9FC1D97706200A95B9B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -268,7 +276,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "work.t-s.MultiAutoCompleteTextSwift";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 2.3;
 			};
 			name = Release;
 		};

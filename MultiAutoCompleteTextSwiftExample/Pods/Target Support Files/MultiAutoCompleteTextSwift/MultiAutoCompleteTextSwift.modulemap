@@ -1,0 +1,6 @@
+framework module MultiAutoCompleteTextSwift {
+  umbrella header "MultiAutoCompleteTextSwift-umbrella.h"
+
+  export *
+  module * { export * }
+}
