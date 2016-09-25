@@ -214,7 +214,7 @@ extension MultiAutoCompleteTextField: UITableViewDataSource, UITableViewDelegate
                 
             }
             targetToken = ""
-            inputTextTokens.popLast()
+            let _ = inputTextTokens.popLast()
             inputTextTokens.append(selectedText)
             
             onSelect(selectedText, indexPath)

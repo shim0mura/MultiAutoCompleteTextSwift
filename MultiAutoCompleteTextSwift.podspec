@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "MultiAutoCompleteTextSwift"
-  s.version      = "0.1.0"
+  s.version      = "0.1.1"
   s.summary      = "TextField can suggest several words like Android's 'MultiAutoCompleteTextView'"
 
   # This description is used to generate tags and improve search results.
