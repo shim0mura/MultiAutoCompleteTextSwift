@@ -9,55 +9,55 @@
 import Foundation
 import UIKit
 
-open class MultiAutoCompleteTextField:UITextField {
+public class MultiAutoCompleteTextField:UITextField {
     /// Manages the instance of tableview
-    open var autoCompleteTableView:UITableView?
+    public var autoCompleteTableView:UITableView?
     /// Handles user selection action on autocomplete table view
-    open var onSelect:(String, IndexPath) -> Void = {_,_ in}
+    public var onSelect:(String, NSIndexPath) -> Void = {_,_ in}
     /// Handles textfield's textchanged
-    open var onTextChange:(String) -> Void = {_ in}
+    public var onTextChange:(String) -> Void = {_ in}
     /// Font for the text suggestions
-    open var autoCompleteTextFont = UIFont.systemFont(ofSize: 12)
+    public var autoCompleteTextFont = UIFont.systemFontOfSize(12)
     /// Color of the text suggestions
-    open var autoCompleteTextColor = UIColor.black
+    public var autoCompleteTextColor = UIColor.blackColor()
     /// Used to set the height of cell for each suggestions
-    open var autoCompleteCellHeight:CGFloat = 33.0
+    public var autoCompleteCellHeight:CGFloat = 33.0
     /// The maximum visible suggestion
-    open var maximumAutoCompleteCount = 3
+    public var maximumAutoCompleteCount = 3
     /// Used to set your own preferred separator inset
-    open var autoCompleteSeparatorInset = UIEdgeInsets.zero
+    public var autoCompleteSeparatorInset = UIEdgeInsetsZero
     /// Hides autocomplete tableview after selecting a suggestion
-    open var hidesWhenSelected = true
+    public var hidesWhenSelected = true
     /// Hides autocomplete tableview when the textfield is empty
-    open var hidesWhenEmpty:Bool?{
+    public var hidesWhenEmpty:Bool?{
         didSet{
             assert(hidesWhenEmpty != nil, "hideWhenEmpty cannot be set to nil")
-            autoCompleteTableView?.isHidden = hidesWhenEmpty!
+            autoCompleteTableView?.hidden = hidesWhenEmpty!
         }
     }
     /// Input words
-    open var inputTextTokens:[String] = []
-    fileprivate var targetToken:String = ""
-    fileprivate var wordTokenizeChars = CharacterSet(charactersIn: " ,")
-    fileprivate var autoCompleteEntries:[MultiAutoCompleteTokenComparable]? = []
+    public var inputTextTokens:[String] = []
+    private var targetToken:String = ""
+    private var wordTokenizeChars = NSCharacterSet(charactersInString: " ,")
+    private var autoCompleteEntries:[MultiAutoCompleteTokenComparable]? = []
     /// Suggest words shown in auto complete tableview
-    open var autoCompleteTokens:[MultiAutoCompleteTokenComparable] = []
+    public var autoCompleteTokens:[MultiAutoCompleteTokenComparable] = []
     /// AutoComplete tokenizer
-    open var autoCompleteWordTokenizers:[String] = [] {
+    public var autoCompleteWordTokenizers:[String] = [] {
         didSet{
-            wordTokenizeChars = CharacterSet(charactersIn: autoCompleteWordTokenizers.joined(separator: "")
+            wordTokenizeChars = NSCharacterSet(charactersInString: autoCompleteWordTokenizers.joinWithSeparator("")
             )
         }
     }
     /// Default input words in text field
-    open var defaultText:String? {
+    public var defaultText:String? {
         didSet{
-            inputTextTokens = defaultText?.components(separatedBy: wordTokenizeChars) ?? []
+            inputTextTokens = defaultText?.componentsSeparatedByCharactersInSet(wordTokenizeChars) ?? []
             self.text = defaultText
         }
     }
     /// The strings to be shown on as suggestions, setting the value of this automatically reload the tableview
-    open var autoCompleteStrings:[String]?{
+    public var autoCompleteStrings:[String]?{
         didSet{
             autoCompleteStrings?.forEach{
                 autoCompleteTokens.append(MultiAutoCompleteToken($0))
@@ -65,8 +65,8 @@ open class MultiAutoCompleteTextField:UITextField {
         }
     }
     /// Add word manually
-    open func addInputToken(_ token: String){
-        if let text = self.text , !text.isEmpty {
+    public func addInputToken(token: String){
+        if let text = self.text where !text.isEmpty {
             self.text = text + "," + token + ","
         }else{
             self.text = token + ","
@@ -86,43 +86,43 @@ open class MultiAutoCompleteTextField:UITextField {
         super.init(coder: aDecoder)
     }
     
-    open override func awakeFromNib() {
+    public override func awakeFromNib() {
         super.awakeFromNib()
         commonInit()
         setupAutocompleteTable(superview!)
     }
     
-    open override func willMove(toSuperview newSuperview: UIView?) {
-        super.willMove(toSuperview: newSuperview)
+    public override func willMoveToSuperview(newSuperview: UIView?) {
+        super.willMoveToSuperview(newSuperview)
         commonInit()
         if let superView = newSuperview {
             setupAutocompleteTable(superView)
         }
     }
     
-    fileprivate func commonInit(){
+    private func commonInit(){
         hidesWhenEmpty = true
-        self.clearButtonMode = .always
-        self.addTarget(self, action: #selector(MultiAutoCompleteTextField.textFieldDidChange), for: .editingChanged)
-        self.addTarget(self, action: #selector(MultiAutoCompleteTextField.textFieldDidEndEditing), for: .editingDidEnd)
+        self.clearButtonMode = .Always
+        self.addTarget(self, action: #selector(MultiAutoCompleteTextField.textFieldDidChange), forControlEvents: .EditingChanged)
+        self.addTarget(self, action: #selector(MultiAutoCompleteTextField.textFieldDidEndEditing), forControlEvents: .EditingDidEnd)
         
     }
     
-    fileprivate func setupAutocompleteTable(_ view:UIView){
-        let screenSize = UIScreen.main.bounds.size
+    private func setupAutocompleteTable(view:UIView){
+        let screenSize = UIScreen.mainScreen().bounds.size
         
         view.layoutIfNeeded()
 
-        let tableView = UITableView(frame: CGRect(x: self.frame.origin.x, y: self.frame.origin.y + self.frame.height + self.frame.height, width: screenSize.width - (self.frame.origin.x * 2), height: 30.0))
+        let tableView = UITableView(frame: CGRectMake(self.frame.origin.x, self.frame.origin.y + CGRectGetHeight(self.frame) + self.frame.height, screenSize.width - (self.frame.origin.x * 2), 30.0))
         tableView.dataSource = self
         tableView.delegate = self
         tableView.rowHeight = autoCompleteCellHeight
-        tableView.isHidden = hidesWhenEmpty ?? true
+        tableView.hidden = hidesWhenEmpty ?? true
         view.addSubview(tableView)
         autoCompleteTableView = tableView
     }
     
-    fileprivate func redrawTable(){
+    private func redrawTable(){
         if let autoCompleteTableView = autoCompleteTableView {
             var newFrame = autoCompleteTableView.frame
             newFrame.size.height = autoCompleteTableView.contentSize.height
@@ -131,12 +131,12 @@ open class MultiAutoCompleteTextField:UITextField {
     }
     
     //MARK: - Private Methods
-    fileprivate func reload(){
+    private func reload(){
         autoCompleteEntries = []
 
-        inputTextTokens = text!.components(separatedBy: wordTokenizeChars)
+        inputTextTokens = text!.componentsSeparatedByCharactersInSet(wordTokenizeChars)
 
-        if let lastToken = inputTextTokens.last , !lastToken.isEmpty {
+        if let lastToken = inputTextTokens.last where !lastToken.isEmpty {
             
             targetToken = lastToken
             
@@ -159,41 +159,41 @@ open class MultiAutoCompleteTextField:UITextField {
         
         reload()
         onTextChange(text!)
-        DispatchQueue.main.async(execute: { () -> Void in
-            self.autoCompleteTableView?.isHidden =  self.hidesWhenEmpty! ? self.text!.isEmpty : false
+        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+            self.autoCompleteTableView?.hidden =  self.hidesWhenEmpty! ? self.text!.isEmpty : false
         })
     }
     
     func textFieldDidEndEditing() {
-        autoCompleteTableView?.isHidden = true
+        autoCompleteTableView?.hidden = true
     }
 }
 
 //MARK: - UITableViewDataSource - UITableViewDelegate
 extension MultiAutoCompleteTextField: UITableViewDataSource, UITableViewDelegate {
     
-    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    public func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let count = autoCompleteEntries != nil ? (autoCompleteEntries!.count > maximumAutoCompleteCount ? maximumAutoCompleteCount : autoCompleteEntries!.count) : 0
         return count
     }
     
-    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    public func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cellIdentifier = "autocompleteCellIdentifier"
-        var cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier)
+        var cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier)
         if cell == nil{
-            cell = UITableViewCell(style: .default, reuseIdentifier: cellIdentifier)
+            cell = UITableViewCell(style: .Default, reuseIdentifier: cellIdentifier)
         }
         
         cell?.textLabel?.font = autoCompleteTextFont
         cell?.textLabel?.textColor = autoCompleteTextColor
-        cell?.textLabel?.text = autoCompleteEntries![(indexPath as NSIndexPath).row].topText
+        cell?.textLabel?.text = autoCompleteEntries![indexPath.row].topText
         
         cell?.contentView.gestureRecognizers = nil
         return cell!
     }
     
-    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let cell = tableView.cellForRow(at: indexPath)
+    public func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let cell = tableView.cellForRowAtIndexPath(indexPath)
         
         if let selectedText = cell?.textLabel?.text {
                         
@@ -206,7 +206,7 @@ extension MultiAutoCompleteTextField: UITableViewDataSource, UITableViewDelegate
                     let pattern = "\(targetToken)$"
                     regex = try NSRegularExpression(pattern: pattern, options: [])
                     
-                    self.text = regex.stringByReplacingMatches(in: self.text!, options: [], range: NSMakeRange(0, self.text!.characters.count), withTemplate: selectedText + " ")
+                    self.text = regex.stringByReplacingMatchesInString(self.text!, options: [], range: NSMakeRange(0, self.text!.characters.count), withTemplate: selectedText + " ")
                     
                 } catch let error as NSError {
                     assertionFailure(error.localizedDescription)
@@ -220,39 +220,39 @@ extension MultiAutoCompleteTextField: UITableViewDataSource, UITableViewDelegate
             onSelect(selectedText, indexPath)
         }
         
-        DispatchQueue.main.async(execute: { () -> Void in
-            tableView.isHidden = self.hidesWhenSelected
+        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+            tableView.hidden = self.hidesWhenSelected
         })
     }
     
-    public func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if cell.responds(to: #selector(setter: UITableViewCell.separatorInset)){
+    public func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        if cell.respondsToSelector(Selector("setSeparatorInset:")){
             cell.separatorInset = autoCompleteSeparatorInset
         }
-        if cell.responds(to: #selector(setter: UIView.preservesSuperviewLayoutMargins)){
+        if cell.respondsToSelector(Selector("setPreservesSuperviewLayoutMargins:")){
             cell.preservesSuperviewLayoutMargins = false
         }
-        if cell.responds(to: #selector(setter: UIView.layoutMargins)){
+        if cell.respondsToSelector(Selector("setLayoutMargins:")){
             cell.layoutMargins = autoCompleteSeparatorInset
         }
         
     }
     
-    public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    public func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return autoCompleteCellHeight
     }
 }
 
 public protocol MultiAutoCompleteTokenComparable {
     var topText: String { get }
-    func matchToken(_ searchString: String) -> Bool
+    func matchToken(searchString: String) -> Bool
 }
 
-open class MultiAutoCompleteToken: MultiAutoCompleteTokenComparable {
+public class MultiAutoCompleteToken: MultiAutoCompleteTokenComparable {
     
-    open var topText: String
-    var searchOptions: NSString.CompareOptions = .caseInsensitive
-    fileprivate var texts: [String] = []
+    public var topText: String
+    var searchOptions: NSStringCompareOptions = .CaseInsensitiveSearch
+    private var texts: [String] = []
     
     public init(top: String, subTexts: String...){
         self.topText = top
@@ -265,9 +265,9 @@ open class MultiAutoCompleteToken: MultiAutoCompleteTokenComparable {
         self.texts.append(top)
     }
     
-    open func matchToken(_ searchString: String) -> Bool {
+    public func matchToken(searchString: String) -> Bool {
         let result = self.texts.contains{
-            let range = $0.range(of: searchString, options: searchOptions, range: nil, locale: nil)
+            let range = $0.rangeOfString(searchString, options: searchOptions, range: nil, locale: nil)
             return range != nil
         }
         

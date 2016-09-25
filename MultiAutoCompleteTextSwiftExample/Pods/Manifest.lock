@@ -1,5 +1,5 @@
 PODS:
-  - MultiAutoCompleteTextSwift (0.0.1)
+  - MultiAutoCompleteTextSwift (0.1.0)
 
 DEPENDENCIES:
   - MultiAutoCompleteTextSwift (from `..`)
@@ -9,7 +9,7 @@ EXTERNAL SOURCES:
     :path: ".."
 
 SPEC CHECKSUMS:
-  MultiAutoCompleteTextSwift: 9b9c8d1bb434588361d4a22e777b1947b2eb8169
+  MultiAutoCompleteTextSwift: ff31262425af39defa373769354285d36ce5d47f
 
 PODFILE CHECKSUM: 7e5ac774fb9572dbd227b44031fc4a3a7ce1b26b
 

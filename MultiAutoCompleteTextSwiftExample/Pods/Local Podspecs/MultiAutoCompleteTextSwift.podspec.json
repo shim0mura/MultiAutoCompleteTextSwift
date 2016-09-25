@@ -1,8 +1,7 @@
 {
   "name": "MultiAutoCompleteTextSwift",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "summary": "TextField can suggest several words like Android's 'MultiAutoCompleteTextView'",
-  "description": "TextField can suggest several words like Android's 'MultiAutoCompleteTextView'.\nWords punctuated by ',' default. You can add other separator.",
   "homepage": "https://github.com/shim0mura/MultiAutoCompleteTextSwift",
   "license": "MIT",
   "authors": {
@@ -13,7 +12,7 @@
   },
   "source": {
     "git": "https://github.com/shim0mura/MultiAutoCompleteTextSwift.git",
-    "tag": "0.0.1"
+    "tag": "0.1.0"
   },
   "source_files": "MultiAutoCompleteTextSwift/*.{swift}",
   "exclude_files": "Classes/Exclude",
