@@ -11,15 +11,15 @@ This code is modified from [AutocompleteTextfieldSwift](https://github.com/mnbay
 
 #### Cocoapods
 
-Add `MultiAutocompleteTextSwift` to Podfile.
+Add `MultiAutoCompleteTextSwift` to Podfile.
 
-    pod 'MultiAutocompleteTextSwift'
+    pod 'MultiAutoCompleteTextSwift'
 
 #### Carthage
 
-Add the `shim0mura/MultiAutocompleteTextSwift` to Carthfile.
+Add the `shim0mura/MultiAutoCompleteTextSwift` to Carthfile.
 
-    github 'shim0mura/MultiAutocompleteTextSwift'
+    github "shim0mura/MultiAutoCompleteTextSwift"
 
 ## Basic Usage
 
@@ -63,7 +63,7 @@ textField.autoCompleteWordTokenizers([',', ':', ';'])
 
 ## Version
 
-MultiAutocompleteTextSwift support swift 3.0. In v0.1.0, MultiAutocompleteTextSwift support swift 2.3.
+MultiAutoCompleteTextSwift support swift 3.0. In v0.1.0, MultiAutoCompleteTextSwift support swift 2.3.
 
 ## License
-MultiAutocompleteTextSwift is under [MIT license](http://opensource.org/licenses/MIT). See LICENSE for details.
+MultiAutoCompleteTextSwift is under [MIT license](http://opensource.org/licenses/MIT). See LICENSE for details.
